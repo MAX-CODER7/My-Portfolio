@@ -1,0 +1,6 @@
+.ac-card { background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); border-radius:12px; padding:16px; min-height:140px; box-shadow: 0 8px 30px rgba(2,6,23,0.6); border: 1px solid rgba(255,255,255,0.03); display:flex; flex-direction:column; justify-content:space-between; transition: box-shadow 180ms ease; }
+.ac-card:hover { box-shadow: 0 18px 60px rgba(2,6,23,0.72); }
+.ac-title { margin:0; color: var(--text); font-size:1.05rem; letter-spacing:0.2px; }
+.ac-sub { margin:8px 0 0; color: var(--muted); font-size:0.95rem; line-height:1.4; }
+.ac-footer { margin-top:12px; display:flex; justify-content:flex-end; gap:8px; }
+.ac-cta a { display:inline-block; padding:8px 12px; border-radius:8px; background: linear-gradient(90deg,var(--accent), #66f0ff); color:#001; font-weight:700; text-decoration:none; border: none; }

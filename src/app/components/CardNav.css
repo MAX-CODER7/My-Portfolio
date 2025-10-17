@@ -1,0 +1,24 @@
+/* CardNav - Dark Glassmorphic */
+.rb-cardnav-root { position: fixed; top: 18px; left: 50%; transform: translateX(-50%); z-index: 70; width: min(96%, 1100px); pointer-events: auto; }
+.rb-cardnav { background: rgba(12,14,18,0.35); border-radius: 14px; backdrop-filter: blur(10px) saturate(120%); -webkit-backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.04); box-shadow: 0 8px 30px rgba(0,0,0,0.6); overflow: hidden; transition: height 260ms ease; }
+.rb-cardnav-top { display:flex; align-items:center; justify-content:space-between; gap:12px; padding:10px 14px; }
+.rb-hamburger { background:none; border:none; color:var(--text); cursor:pointer; padding:6px; border-radius:8px; }
+.rb-logo img { height:38px; width:38px; border-radius:10px; object-fit:cover; box-shadow: 0 6px 20px rgba(2,6,23,0.65); }
+.rb-actions { display:flex; align-items:center; gap:10px; }
+.rb-icon-btn { display:inline-flex; align-items:center; justify-content:center; width:36px; height:36px; border-radius:10px; background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); color:var(--text); border:1px solid rgba(255,255,255,0.03); text-decoration:none; }
+.rb-theme-btn { padding:6px 10px; border-radius:8px; background: linear-gradient(90deg, rgba(6,182,218,0.12), rgba(10,184,210,0.06)); border: 1px solid rgba(255,255,255,0.03); color:var(--text); cursor:pointer; }
+
+.rb-cardnav-content { display:none; padding:12px; gap:10px; }
+.rb-nav-card { padding:12px; border-radius:10px; background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); margin-bottom:10px; }
+.rb-nav-card-label { font-weight:700; color:var(--text); text-decoration:none; display:block; margin-bottom:6px; }
+.rb-nav-card-links { display:flex; flex-direction:column; gap:6px; }
+.rb-nav-link-item { color:var(--muted); text-decoration:none; font-size:0.95rem; }
+
+.rb-cardnav.open .rb-cardnav-content { display:block; }
+
+/* small screens */
+@media (max-width:640px){
+  .rb-cardnav { width:94%; }
+  .rb-cardnav-top { padding:8px; }
+  .rb-logo img { height:34px; width:34px; }
+}
