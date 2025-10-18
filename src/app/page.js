@@ -4,7 +4,6 @@ import React, { useState } from "react";
 import { motion } from "framer-motion";
 import Prism from "./components/Prism";
 import TiltedCard from "./components/TiltedCard";
-import IconGrid from "./components/IconGrid";
 import AnimatedCard from "./components/AnimatedCard";
 import CardNav from "./components/CardNav";
 import { Linkedin } from "lucide-react";
@@ -14,30 +13,41 @@ const LINKEDIN = "https://www.linkedin.com/in/praneesh-l-n-246141328/";
 
 // Skills & Projects data
 const skillsData = [
+  { name: "Python", level: "Expert" },
+  { name: "C Programming", level: "Intermediate" },
+  { name: "Java", level: "Intermediate" },
   { name: "React", level: "Expert" },
-  { name: "Java", level: "Expert" },
-  { name: "Next.js", level: "Intermediate" },
-  { name: "Python", level: "Intermediate" },
-  { name: "SQL", level: "Intermediate" },
+  { name: "Next.js", level: "Beginner" },
+  { name: "SQL", level: "Expert" },
+  { name: "Cloud Integration", level: "Beginner" },
+  { name: "AI Automation", level: "Intermediate" },
 ];
 
 const projectsData = [
   {
     title: "Portfolio Website",
     description: "My personal portfolio built with React, Next.js and CSS.",
-    linkLabel: "View on LinkedIn",
-    link: LINKEDIN
+    linkLabel: "LinkedIn",
+    link: LINKEDIN,
   },
   {
     title: "ACE APPLY",
-    description: "Full-stack web app for resume optimization and personalized job discovery.",
-    linkLabel: "View on LinkedIn",
-    link: LINKEDIN
+    description:
+      "Full-stack web app for resume optimization and personalized job discovery.",
+    linkLabel: "LinkedIn",
+    link: LINKEDIN,
+  },
+  {
+    title: "AI HEALTHCARE RECEPTIONIST",
+    description:
+      "Intelligent virtual assistant for automated patient scheduling and medical triage.",
+    linkLabel: "LinkedIn",
+    link: LINKEDIN,
   },
 ];
 
 export default function Page() {
-  const [darkMode, setDarkMode] = useState(false);
+  const [darkMode] = useState(false);
 
   const navItems = [
     { label: "About", bgColor: "#0D0716", textColor: "#fff", href: "#about" },
@@ -45,32 +55,50 @@ export default function Page() {
     { label: "Projects", bgColor: "#271E37", textColor: "#fff", href: "#projects" },
   ];
 
-  const cardVariants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: { opacity: 1, y: 0 },
-    hover: { scale: 1.04, y: -6 },
+  const fadeUp = {
+    hidden: { opacity: 0, y: 40 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: "easeOut" } },
+  };
+
+  const glassStyle = {
+    padding: "4rem 2rem",
+    maxWidth: "900px",
+    margin: "4rem auto",
+    borderRadius: "20px",
+    backdropFilter: "blur(18px) saturate(180%)",
+    background:
+      "linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.08) 100%)",
+    boxShadow: "0 8px 40px rgba(0,0,0,0.25)",
+    color: "#fff",
   };
 
   return (
-    <div className={darkMode ? "dark-mode" : "light-mode"} style={{ position: "relative", overflowX: "hidden" }}>
+    <div
+      className={darkMode ? "dark-mode" : "light-mode"}
+      style={{
+        position: "relative",
+        overflowX: "hidden",
+        minHeight: "100vh",
+      }}
+    >
       <Prism />
 
-      {/* CardNav */}
-      <CardNav
-        items={navItems.map(item => ({
-          label: item.label,
-          bgColor: item.bgColor,
-          textColor: item.textColor,
-          links: [{ label: item.label, href: item.href }]
-        }))}
-        baseColor={darkMode ? "#111" : "rgba(255,255,255,0.04)"}
-        menuColor={darkMode ? "#fff" : "#000"}
-        buttonBgColor="#111"
-        buttonTextColor="#fff"
-      />
+      {/* Navigation */}
+      <CardNav items={navItems} />
 
       {/* Hero Section */}
-      <div style={{ display: "flex", justifyContent: "center", marginTop: "6rem", position: "relative" }}>
+      <motion.div
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.3 }}
+        variants={fadeUp}
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          marginTop: "6rem",
+          position: "relative",
+        }}
+      >
         <TiltedCard
           imageSrc="/profile.jpg"
           altText="PRANEESH"
@@ -81,90 +109,154 @@ export default function Page() {
           imageWidth="320px"
           rotateAmplitude={12}
           scaleOnHover={1.12}
-          showMobileWarning={false}
-          showTooltip={false}
+          showMobileWarning={true}
+          showTooltip={true}
           displayOverlayContent={true}
           overlayContent={
-            <p style={{
-              position: "absolute",
-              top: "10px",
-              left: "10px",
-              color: "#fff",
-              fontSize: "1.3rem",
-              fontWeight: "700",
-              textShadow: "0 0 6px rgba(0,0,0,0.6)",
-              pointerEvents: "none",
-              zIndex: 5
-            }}>
-              PRANEESH  
+            <p
+              style={{
+                position: "absolute",
+                top: "10px",
+                left: "10px",
+                color: "#fff",
+                fontSize: "1.3rem",
+                fontWeight: "700",
+                textShadow: "0 0 6px rgba(0,0,0,0.6)",
+                pointerEvents: "none",
+                zIndex: 5,
+              }}
+            >
+              PRANEESH
             </p>
           }
         />
-        {/* Social icons overlay */}
-        <div style={{ position: "absolute", bottom: "-20px", right: "0", display: "flex", gap: "1rem" }}>
+        <div
+          style={{
+            position: "absolute",
+            bottom: "-20px",
+            right: "0",
+            display: "flex",
+            gap: "1rem",
+          }}
+        >
           <a href={LINKEDIN} target="_blank" rel="noreferrer" aria-label="LinkedIn">
             <Linkedin />
           </a>
         </div>
-      </div>
+      </motion.div>
 
-      {/* About Me Section */}
-      <div id="about" style={{ padding: "4rem 2rem", maxWidth: "900px", margin: "0 auto" }}>
+      {/* About Section */}
+      <motion.div
+        id="about"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.3 }}
+        variants={fadeUp}
+        style={glassStyle}
+      >
         <h2 style={{ fontSize: "2rem", marginBottom: "1rem" }}>About Me</h2>
-        <div style={{ lineHeight: 1.8, color: "rgba(255,255,255,0.9)", fontSize: "1.1rem" }}>
+        <div style={{ lineHeight: 1.8, fontSize: "1.1rem" }}>
           <p>Aspiring DevOps Engineer | AI/ML Enthusiast | Full-Stack • AWS/GCP</p>
           <p>
-            I’m passionate about building scalable software systems, integrating AI into modern applications,
-            and automating infrastructure with DevOps best practices.
+            I’m passionate about building scalable software systems, integrating AI into modern
+            applications, and automating infrastructure with DevOps best practices.
           </p>
         </div>
-      </div>
+      </motion.div>
 
       {/* Skills Section */}
-      <div id="skills" style={{ padding: "4rem 2rem", maxWidth: "900px", margin: "0 auto" }}>
+      <motion.div
+        id="skills"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.3 }}
+        variants={fadeUp}
+        style={{ ...glassStyle, maxWidth: "900px" }}
+      >
         <h2 style={{ fontSize: "2rem", marginBottom: "2rem" }}>Tech Skills</h2>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(180px,1fr))", gap: "1rem" }}>
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fit,minmax(180px,1fr))",
+            gap: "1rem",
+          }}
+        >
           {skillsData.map((skill, i) => (
             <motion.div
               key={i}
-              variants={cardVariants}
               initial="hidden"
               whileInView="visible"
-              whileHover="hover"
+              whileHover={{ scale: 1.05 }}
+              variants={fadeUp}
               viewport={{ once: true, amount: 0.3 }}
             >
-              <AnimatedCard title={skill.name} subtitle={skill.level} cta={<a href={LINKEDIN} target="_blank" rel="noreferrer">LinkedIn</a>} />
+              <AnimatedCard
+                title={skill.name}
+                subtitle={skill.level}
+                cta={
+                  <a href={LINKEDIN} target="_blank" rel="noreferrer">
+                    LinkedIn
+                  </a>
+                }
+              />
             </motion.div>
           ))}
         </div>
-      </div>
+      </motion.div>
 
       {/* Projects Section */}
-      <div id="projects" style={{ padding: "4rem 2rem", maxWidth: "1200px", margin: "0 auto" }}>
+      <motion.div
+        id="projects"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.3 }}
+        variants={fadeUp}
+        style={{ ...glassStyle, maxWidth: "1200px" }}
+      >
         <h2 style={{ fontSize: "2rem", marginBottom: "2rem" }}>Projects</h2>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(280px,1fr))", gap: "1rem" }}>
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fit,minmax(280px,1fr))",
+            gap: "1rem",
+          }}
+        >
           {projectsData.map((proj, i) => (
             <motion.div
               key={i}
-              variants={cardVariants}
               initial="hidden"
               whileInView="visible"
-              whileHover="hover"
+              whileHover={{ scale: 1.05 }}
+              variants={fadeUp}
               viewport={{ once: true, amount: 0.3 }}
             >
               <AnimatedCard
                 title={proj.title}
                 subtitle={proj.description}
-                cta={<a href={proj.link} target="_blank" rel="noreferrer">{proj.linkLabel}</a>}
+                cta={
+                  <a href={proj.link} target="_blank" rel="noreferrer">
+                    {proj.linkLabel}
+                  </a>
+                }
               />
             </motion.div>
           ))}
         </div>
-      </div>
+      </motion.div>
 
       {/* Footer */}
-      <footer style={{ textAlign: "center", marginTop: "4rem", padding: "2rem 0", opacity: 0.7 }}>
-        © {new Date().getFullYear()} Praneesh — <a href={LINKEDIN} target="_blank" rel="noreferrer">LinkedIn</a>
+      <footer
+        style={{
+          textAlign: "center",
+          marginTop: "4rem",
+          padding: "2rem 0",
+          opacity: 0.9,
+        }}
+      >
+        © {new Date().getFullYear()} Praneesh —{" "}
+        <a href={LINKEDIN} target="_blank" rel="noreferrer">
+          LinkedIn
+        </a>
       </footer>
     </div>
   );

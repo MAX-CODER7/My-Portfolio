@@ -1,43 +1,72 @@
 "use client";
 
-import React, { useRef, useState, useLayoutEffect } from "react";
-import { FiMenu, FiX, FiLinkedin, FiGithub, FiMail } from "react-icons/fi";
-import "./CardNav.css";
+import React from "react";
+import GlassSurface from "./GlassSurface";
+import "./GlassSurface.css"; // Ensure styles are loaded
 
-export default function CardNav({ items = [], onToggleTheme, github, linkedin, email }) {
-  const [open, setOpen] = useState(false);
-
+export default function CardNav({ items = [] }) {
   return (
-    <div className="rb-cardnav-root" role="navigation" aria-label="Main navigation">
-      <div className={`rb-cardnav ${open ? "open" : ""}`}>
-        <div className="rb-cardnav-top">
-          <button className="rb-hamburger" onClick={() => setOpen(!open)} aria-label={open ? "Close menu" : "Open menu"}>
-            {open ? <FiX size={20} /> : <FiMenu size={20} />}
-          </button>
-
-          <div className="rb-actions">
-            <a href={linkedin} target="_blank" rel="noreferrer" className="rb-icon-btn" aria-label="LinkedIn"><FiLinkedin size={18} /></a>
-            <a href={github} target="_blank" rel="noreferrer" className="rb-icon-btn" aria-label="GitHub"><FiGithub size={18} /></a>
-            <a href={email} className="rb-icon-btn" aria-label="Email"><FiMail size={18} /></a>
-            <button className="rb-theme-btn" onClick={() => onToggleTheme && onToggleTheme()} aria-label="Toggle theme">Theme</button>
-          </div>
-        </div>
-
-        <div className="rb-cardnav-content">
-          {items.map((it, idx) => (
-            <div key={idx} className="rb-nav-card">
-              <a href={it.href || `#${it.label?.toLowerCase()}`} className="rb-nav-card-label">{it.label}</a>
-              {it.links && (
-                <div className="rb-nav-card-links">
-                  {it.links.map((lnk, i) => (
-                    <a key={i} href={lnk.href} className="rb-nav-link-item">{lnk.label}</a>
-                  ))}
-                </div>
-              )}
-            </div>
+    <div
+      style={{
+        position: "fixed",
+        top: "0",
+        left: "50%",
+        transform: "translateX(-50%)",
+        zIndex: 999,
+        width: "80%",
+        display: "flex",
+        justifyContent: "center",
+        backdropFilter: "blur(12px)",
+        borderRadius: "24px",
+        overflow: "hidden",
+      }}
+    >
+      <GlassSurface
+        width="100%"
+        height={80}
+        borderRadius={20}
+        displace={0}
+        distortionScale={-180}
+        blur={11}
+        backgroundOpacity={0}
+        saturation={1}
+        redOffset={0}
+        greenOffset={10}
+        blueOffset={20}
+        brightness={50}
+        opacity={0.93}
+        xChannel="R"
+        yChannel="G"
+        mixBlendMode="difference"
+        className="glass-cardnav"
+      >
+        <nav
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            height: "100%",
+            gap: "2rem",
+          }}
+        >
+          {items.map((item, idx) => (
+            <a
+              key={idx}
+              href={item.href}
+              style={{
+                color: "#fff",
+                fontSize: "1rem",
+                textDecoration: "none",
+                transition: "all 0.3s ease",
+              }}
+              onMouseEnter={(e) => (e.target.style.color = "#00c6ff")}
+              onMouseLeave={(e) => (e.target.style.color = "#fff")}
+            >
+              {item.label}
+            </a>
           ))}
-        </div>
-      </div>
+        </nav>
+      </GlassSurface>
     </div>
   );
 }
