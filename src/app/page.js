@@ -14,9 +14,9 @@ const LINKEDIN = "https://www.linkedin.com/in/praneesh-l-n-246141328/";
 // Skills & Projects data
 const skillsData = [
   { name: "Python", level: "Expert" },
-  { name: "C Programming", level: "Intermediate" },
+  { name: "C Programming", level: "Expert" },
   { name: "Java", level: "Intermediate" },
-  { name: "React", level: "Expert" },
+  { name: "React", level: "Intermediate" },
   { name: "Next.js", level: "Beginner" },
   { name: "SQL", level: "Expert" },
   { name: "Cloud Integration", level: "Beginner" },
@@ -58,18 +58,6 @@ export default function Page() {
   const fadeUp = {
     hidden: { opacity: 0, y: 40 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: "easeOut" } },
-  };
-
-  const glassStyle = {
-    padding: "4rem 2rem",
-    maxWidth: "900px",
-    margin: "4rem auto",
-    borderRadius: "20px",
-    backdropFilter: "blur(18px) saturate(180%)",
-    background:
-      "linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.08) 100%)",
-    boxShadow: "0 8px 40px rgba(0,0,0,0.25)",
-    color: "#fff",
   };
 
   return (
@@ -130,6 +118,7 @@ export default function Page() {
             </p>
           }
         />
+        {/* LinkedIn Icon */}
         <div
           style={{
             position: "absolute",
@@ -152,10 +141,19 @@ export default function Page() {
         whileInView="visible"
         viewport={{ once: true, amount: 0.3 }}
         variants={fadeUp}
-        style={glassStyle}
+        className="glass-panel"
+        style={{
+          padding: "4rem 2rem",
+          maxWidth: "900px",
+          margin: "4rem auto",
+          borderRadius: "20px",
+          backdropFilter: "blur(14px)",
+          background: "rgba(255, 255, 255, 0.08)",
+          boxShadow: "0 8px 40px rgba(0,0,0,0.25)",
+        }}
       >
         <h2 style={{ fontSize: "2rem", marginBottom: "1rem" }}>About Me</h2>
-        <div style={{ lineHeight: 1.8, fontSize: "1.1rem" }}>
+        <div style={{ lineHeight: 1.8, fontSize: "1.1rem", color: "rgba(255,255,255,0.9)" }}>
           <p>Aspiring DevOps Engineer | AI/ML Enthusiast | Full-Stack • AWS/GCP</p>
           <p>
             I’m passionate about building scalable software systems, integrating AI into modern
@@ -171,7 +169,16 @@ export default function Page() {
         whileInView="visible"
         viewport={{ once: true, amount: 0.3 }}
         variants={fadeUp}
-        style={{ ...glassStyle, maxWidth: "900px" }}
+        className="glass-panel"
+        style={{
+          padding: "4rem 2rem",
+          maxWidth: "900px",
+          margin: "4rem auto",
+          borderRadius: "20px",
+          backdropFilter: "blur(14px)",
+          background: "rgba(255, 255, 255, 0.08)",
+          boxShadow: "0 8px 40px rgba(0,0,0,0.25)",
+        }}
       >
         <h2 style={{ fontSize: "2rem", marginBottom: "2rem" }}>Tech Skills</h2>
         <div
@@ -211,7 +218,16 @@ export default function Page() {
         whileInView="visible"
         viewport={{ once: true, amount: 0.3 }}
         variants={fadeUp}
-        style={{ ...glassStyle, maxWidth: "1200px" }}
+        className="glass-panel"
+        style={{
+          padding: "4rem 2rem",
+          maxWidth: "1200px",
+          margin: "4rem auto",
+          borderRadius: "20px",
+          backdropFilter: "blur(14px)",
+          background: "rgba(255, 255, 255, 0.08)",
+          boxShadow: "0 8px 40px rgba(0,0,0,0.25)",
+        }}
       >
         <h2 style={{ fontSize: "2rem", marginBottom: "2rem" }}>Projects</h2>
         <div
@@ -250,7 +266,7 @@ export default function Page() {
           textAlign: "center",
           marginTop: "4rem",
           padding: "2rem 0",
-          opacity: 0.9,
+          opacity: 0.7,
         }}
       >
         © {new Date().getFullYear()} Praneesh —{" "}
