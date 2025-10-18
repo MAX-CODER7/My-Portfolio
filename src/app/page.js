@@ -1,12 +1,15 @@
 "use client";
 
 import React, { useState } from "react";
+import dynamic from "next/dynamic";
 import { motion } from "framer-motion";
-import Prism from "./components/Prism";
-import TiltedCard from "./components/TiltedCard";
-import AnimatedCard from "./components/AnimatedCard";
-import CardNav from "./components/CardNav";
 import { Linkedin } from "lucide-react";
+
+// Dynamic imports to fix SSR issues
+const Prism = dynamic(() => import("./components/Prism"), { ssr: false });
+const TiltedCard = dynamic(() => import("./components/TiltedCard"), { ssr: false });
+const AnimatedCard = dynamic(() => import("./components/AnimatedCard"), { ssr: false });
+const CardNav = dynamic(() => import("./components/CardNav"), { ssr: false });
 
 // LinkedIn URL
 const LINKEDIN = "https://www.linkedin.com/in/praneesh-l-n-246141328/";
@@ -118,7 +121,6 @@ export default function Page() {
             </p>
           }
         />
-        {/* LinkedIn Icon */}
         <div
           style={{
             position: "absolute",
@@ -141,25 +143,20 @@ export default function Page() {
         whileInView="visible"
         viewport={{ once: true, amount: 0.3 }}
         variants={fadeUp}
-        className="glass-panel"
         style={{
           padding: "4rem 2rem",
           maxWidth: "900px",
-          margin: "4rem auto",
-          borderRadius: "20px",
-          backdropFilter: "blur(14px)",
-          background: "rgba(255, 255, 255, 0.08)",
-          boxShadow: "0 8px 40px rgba(0,0,0,0.25)",
+          margin: "0 auto",
+          lineHeight: 1.8,
+          fontSize: "1.1rem",
+          color: "rgba(255,255,255,0.9)",
         }}
       >
-        <h2 style={{ fontSize: "2rem", marginBottom: "1rem" }}>About Me</h2>
-        <div style={{ lineHeight: 1.8, fontSize: "1.1rem", color: "rgba(255,255,255,0.9)" }}>
-          <p>Aspiring DevOps Engineer | AI/ML Enthusiast | Full-Stack • AWS/GCP</p>
-          <p>
-            I’m passionate about building scalable software systems, integrating AI into modern
-            applications, and automating infrastructure with DevOps best practices.
-          </p>
-        </div>
+        <p>Aspiring DevOps Engineer | AI/ML Enthusiast | Full-Stack • AWS/GCP</p>
+        <p>
+          I’m passionate about building scalable software systems, integrating AI into modern applications,
+          and automating infrastructure with DevOps best practices.
+        </p>
       </motion.div>
 
       {/* Skills Section */}
@@ -169,46 +166,35 @@ export default function Page() {
         whileInView="visible"
         viewport={{ once: true, amount: 0.3 }}
         variants={fadeUp}
-        className="glass-panel"
         style={{
           padding: "4rem 2rem",
           maxWidth: "900px",
-          margin: "4rem auto",
-          borderRadius: "20px",
-          backdropFilter: "blur(14px)",
-          background: "rgba(255, 255, 255, 0.08)",
-          boxShadow: "0 8px 40px rgba(0,0,0,0.25)",
+          margin: "0 auto",
+          display: "grid",
+          gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))",
+          gap: "1rem",
         }}
       >
-        <h2 style={{ fontSize: "2rem", marginBottom: "2rem" }}>Tech Skills</h2>
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit,minmax(180px,1fr))",
-            gap: "1rem",
-          }}
-        >
-          {skillsData.map((skill, i) => (
-            <motion.div
-              key={i}
-              initial="hidden"
-              whileInView="visible"
-              whileHover={{ scale: 1.05 }}
-              variants={fadeUp}
-              viewport={{ once: true, amount: 0.3 }}
-            >
-              <AnimatedCard
-                title={skill.name}
-                subtitle={skill.level}
-                cta={
-                  <a href={LINKEDIN} target="_blank" rel="noreferrer">
-                    LinkedIn
-                  </a>
-                }
-              />
-            </motion.div>
-          ))}
-        </div>
+        {skillsData.map((skill, i) => (
+          <motion.div
+            key={i}
+            initial="hidden"
+            whileInView="visible"
+            whileHover={{ scale: 1.05 }}
+            variants={fadeUp}
+            viewport={{ once: true, amount: 0.3 }}
+          >
+            <AnimatedCard
+              title={skill.name}
+              subtitle={skill.level}
+              cta={
+                <a href={LINKEDIN} target="_blank" rel="noreferrer">
+                  LinkedIn
+                </a>
+              }
+            />
+          </motion.div>
+        ))}
       </motion.div>
 
       {/* Projects Section */}
@@ -218,46 +204,35 @@ export default function Page() {
         whileInView="visible"
         viewport={{ once: true, amount: 0.3 }}
         variants={fadeUp}
-        className="glass-panel"
         style={{
           padding: "4rem 2rem",
           maxWidth: "1200px",
-          margin: "4rem auto",
-          borderRadius: "20px",
-          backdropFilter: "blur(14px)",
-          background: "rgba(255, 255, 255, 0.08)",
-          boxShadow: "0 8px 40px rgba(0,0,0,0.25)",
+          margin: "0 auto",
+          display: "grid",
+          gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
+          gap: "1rem",
         }}
       >
-        <h2 style={{ fontSize: "2rem", marginBottom: "2rem" }}>Projects</h2>
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit,minmax(280px,1fr))",
-            gap: "1rem",
-          }}
-        >
-          {projectsData.map((proj, i) => (
-            <motion.div
-              key={i}
-              initial="hidden"
-              whileInView="visible"
-              whileHover={{ scale: 1.05 }}
-              variants={fadeUp}
-              viewport={{ once: true, amount: 0.3 }}
-            >
-              <AnimatedCard
-                title={proj.title}
-                subtitle={proj.description}
-                cta={
-                  <a href={proj.link} target="_blank" rel="noreferrer">
-                    {proj.linkLabel}
-                  </a>
-                }
-              />
-            </motion.div>
-          ))}
-        </div>
+        {projectsData.map((proj, i) => (
+          <motion.div
+            key={i}
+            initial="hidden"
+            whileInView="visible"
+            whileHover={{ scale: 1.05 }}
+            variants={fadeUp}
+            viewport={{ once: true, amount: 0.3 }}
+          >
+            <AnimatedCard
+              title={proj.title}
+              subtitle={proj.description}
+              cta={
+                <a href={proj.link} target="_blank" rel="noreferrer">
+                  {proj.linkLabel}
+                </a>
+              }
+            />
+          </motion.div>
+        ))}
       </motion.div>
 
       {/* Footer */}
