@@ -66,11 +66,7 @@ export default function Page() {
   return (
     <div
       className={darkMode ? "dark-mode" : "light-mode"}
-      style={{
-        position: "relative",
-        overflowX: "hidden",
-        minHeight: "100vh",
-      }}
+      style={{ position: "relative", overflowX: "hidden", minHeight: "100vh" }}
     >
       <Prism />
 
@@ -146,16 +142,17 @@ export default function Page() {
         style={{
           padding: "4rem 2rem",
           maxWidth: "900px",
-          margin: "0 auto",
+          margin: "4rem auto",
           lineHeight: 1.8,
           fontSize: "1.1rem",
           color: "rgba(255,255,255,0.9)",
         }}
       >
+        <h2 style={{ fontSize: "2rem", marginBottom: "1rem" }}>About Me</h2>
         <p>Aspiring DevOps Engineer | AI/ML Enthusiast | Full-Stack • AWS/GCP</p>
         <p>
-          I’m passionate about building scalable software systems, integrating AI into modern applications,
-          and automating infrastructure with DevOps best practices.
+          I’m passionate about building scalable software systems, integrating AI into modern
+          applications, and automating infrastructure with DevOps best practices.
         </p>
       </motion.div>
 
@@ -169,32 +166,38 @@ export default function Page() {
         style={{
           padding: "4rem 2rem",
           maxWidth: "900px",
-          margin: "0 auto",
-          display: "grid",
-          gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))",
-          gap: "1rem",
+          margin: "4rem auto",
         }}
       >
-        {skillsData.map((skill, i) => (
-          <motion.div
-            key={i}
-            initial="hidden"
-            whileInView="visible"
-            whileHover={{ scale: 1.05 }}
-            variants={fadeUp}
-            viewport={{ once: true, amount: 0.3 }}
-          >
-            <AnimatedCard
-              title={skill.name}
-              subtitle={skill.level}
-              cta={
-                <a href={LINKEDIN} target="_blank" rel="noreferrer">
-                  LinkedIn
-                </a>
-              }
-            />
-          </motion.div>
-        ))}
+        <h2 style={{ fontSize: "2rem", marginBottom: "2rem" }}>Tech Skills</h2>
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))",
+            gap: "1rem",
+          }}
+        >
+          {skillsData.map((skill, i) => (
+            <motion.div
+              key={i}
+              initial="hidden"
+              whileInView="visible"
+              whileHover={{ scale: 1.05 }}
+              variants={fadeUp}
+              viewport={{ once: true, amount: 0.3 }}
+            >
+              <AnimatedCard
+                title={skill.name}
+                subtitle={skill.level}
+                cta={
+                  <a href={LINKEDIN} target="_blank" rel="noreferrer">
+                    LinkedIn
+                  </a>
+                }
+              />
+            </motion.div>
+          ))}
+        </div>
       </motion.div>
 
       {/* Projects Section */}
@@ -207,32 +210,38 @@ export default function Page() {
         style={{
           padding: "4rem 2rem",
           maxWidth: "1200px",
-          margin: "0 auto",
-          display: "grid",
-          gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
-          gap: "1rem",
+          margin: "4rem auto",
         }}
       >
-        {projectsData.map((proj, i) => (
-          <motion.div
-            key={i}
-            initial="hidden"
-            whileInView="visible"
-            whileHover={{ scale: 1.05 }}
-            variants={fadeUp}
-            viewport={{ once: true, amount: 0.3 }}
-          >
-            <AnimatedCard
-              title={proj.title}
-              subtitle={proj.description}
-              cta={
-                <a href={proj.link} target="_blank" rel="noreferrer">
-                  {proj.linkLabel}
-                </a>
-              }
-            />
-          </motion.div>
-        ))}
+        <h2 style={{ fontSize: "2rem", marginBottom: "2rem" }}>Projects</h2>
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
+            gap: "1rem",
+          }}
+        >
+          {projectsData.map((proj, i) => (
+            <motion.div
+              key={i}
+              initial="hidden"
+              whileInView="visible"
+              whileHover={{ scale: 1.05 }}
+              variants={fadeUp}
+              viewport={{ once: true, amount: 0.3 }}
+            >
+              <AnimatedCard
+                title={proj.title}
+                subtitle={proj.description}
+                cta={
+                  <a href={proj.link} target="_blank" rel="noreferrer">
+                    {proj.linkLabel}
+                  </a>
+                }
+              />
+            </motion.div>
+          ))}
+        </div>
       </motion.div>
 
       {/* Footer */}
